@@ -1,10 +1,7 @@
-#Upload Service
+# Upload Service
 
--File (documento, video, whatever)
--Nome do material
--Owner(propietario do arquivo)
--Vinculo(Array de origem)
-
--Aula
--Curso
--Avaliacao
+Requisitos:
+- File (documento, video, whatever)
+- Nome do material (ou nome do arquivo)
+- Owner (proprietário do arquivo)
+- Vinculo (Array de origem (Aula|Curso|Avaliação)
