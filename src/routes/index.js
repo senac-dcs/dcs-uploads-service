@@ -4,38 +4,36 @@ const multerConfig = require('../config/multer');
 
 const Upload = require('../models/Upload');
 
-routes.post('/uploads', multer(multerConfig).single('file'), async (req, res) => {
-    
-    const { originalname: name, size, filename: key, destination: url } = req.file;
-
+routes.post('/uploads', multer(multerConfig).single("file"), async (req, res) => {
+    const { originalname: name, size, key, location: url = "" } = req.file;
+  
     const upload = await Upload.create({
-        name,
-        size,
-        key,
-        url,
-    })
+      name,
+      size,
+      key,
+      url
+    });
+  
     return res.json(upload);
-});
+
+  });
 
 routes.get('/uploads/:id?', async (req, res) => {
 
     const idUpload = req.params.id;
+    
+    const upload = await Upload.findById(idUpload);
 
-    let whereClause = {}
-    if(idUpload) {
-        whereClause = { _id: idUpload }
-    }
-
-    const uploads = await Upload.find(whereClause);
-
-    return res.json(uploads);
+    return res.status(200).json(upload);
 });
 
 routes.delete('/uploads/:id', async (req, res) => {
-    
-    const upload = await Upload.findById(req.params.id);
+
+    const idUpload = req.params.id;
+
+    const upload = await Upload.findById(idUpload);
     await upload.remove();
-    return res.send();
+    return res.status(200).send("Deletado com sucesso");
 });
 
 module.exports = routes;
