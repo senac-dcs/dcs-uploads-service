@@ -8,6 +8,10 @@ Service Link
 #### Requests
 
 `POST /uploads/`
+formData
+{
+  file
+}
 
 `GET /uploads/:id?`
 
