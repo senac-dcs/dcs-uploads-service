@@ -6,6 +6,8 @@ const morgan = require('morgan');
 
 const path = require("path");
 
+const port = process.env.PORT || 3000;
+
 dotenv.config();
 
 mongoose.connect(
@@ -29,4 +31,8 @@ app.use(
 
 app.use(require('./routes/'))
 
-app.listen(3000);
+app.listen(port);
+
+app.get('/', (req, res, next) => {
+    res.send(`welcome to /`);
+})
