@@ -23,7 +23,13 @@ routes.get('/uploads/:id?', async (req, res) => {
 
     const idUpload = req.params.id;
     
-    const upload = await Upload.findById(idUpload);
+    let upload = null;
+    
+    if(idUpload){
+      upload = await Upload.findById(idUpload);
+    } else {
+      upload = await Upload.find({});
+    }
 
     return res.status(200).json(upload);
 });
