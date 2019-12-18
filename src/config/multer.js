@@ -10,9 +10,8 @@ const storageTypes = {
       cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"));
     },
     filename:  (req, file, cb) => {
-        file.key = `${new Date().getTime()}-${file.originalname}`;
-        
-        return cb(null, file.key);
+      file.key = `${new Date().getTime()}-${file.originalname}`;
+        cb(null, file.key);
     }
   }),
   s3: multerS3({
@@ -22,7 +21,7 @@ const storageTypes = {
     acl: "public-read",
     key: (req, file, cb) => {
         const fileName = `${new Date().getTime()}-${file.originalname}`;
-        return cb(null, fileName);
+        cb(null, fileName);
     }
   })
 };
